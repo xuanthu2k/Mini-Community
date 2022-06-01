@@ -1,0 +1,26 @@
+user: {
+	name: String,
+	avatar: String,
+	posts: [
+		{
+			type: _ID,
+			ref: "post"
+		}
+	]
+}
+
+post: {
+	by: {type: _ID, ref:"user"},
+	content: {
+		text: String,
+		image: String
+	},
+	comments: [
+		{
+			by: {type: _ID, ref:"user"},
+			text: String
+		}
+	],
+	likes: Number,
+	createAt: Date
+}
