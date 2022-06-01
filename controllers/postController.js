@@ -35,6 +35,28 @@ const postController = {
             })
         }
     },
+
+    //get a post
+    getPost: async(req,res)=>{
+        try {
+            const post = await Post.findById(req.params.id).populate("by").populate("comments")
+            if(post){
+                return res.json({
+                    code: 200,
+                    data: post
+                })
+            }
+            return res.json({
+                code: 400,
+                message: "khong tim thay post"
+            })
+        } catch (error) {
+            return res.json({
+                code: 500,
+                error
+            })
+        }
+    },
     
     //update post
     updatePost: async(req,res)=>{
