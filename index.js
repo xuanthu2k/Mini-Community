@@ -11,6 +11,7 @@ const authRoute = require('./routes/authRoute')
 dotenv.config()
 const app = express()
 app.use(express.json())
+app.use(cors())
 
 //connect DB
 mongoose.connect(process.env.MONGO_URI,()=>{console.log('Ket noi db thanh cong');})
