@@ -23,7 +23,7 @@ app.use('/api/auth',authRoute)
 
 app.get('/',(req,res)=>{
     res.json({
-        message: 'Add /api/user or /api/post or /api/comment'
+        message: 'This link not support, please add /api/user or /api/post or /api/comment'
     })
 })
 
