@@ -5,9 +5,21 @@ const {User, Post} = require('../models/model')
 const postController = {
     addPost: async(req,res)=>{
         try {
-            const newPost = new Post(req.body)
+            const {content, image} = req.body
+            if(!content || !image){
+                return res.json({
+                    code: 400,
+                    message: "Invalid post"
+                })
+            }
+            const postData = {
+                author: req.user.id,
+                content,
+                image
+            }
+            const newPost = new Post(postData)
             const savePost = await newPost.save()
-            const author = await User.findById(req.body.by)
+            const author = await User.findById(req.user.id)
             await author.updateOne({$push:{ posts: savePost._id}})
             return res.json({
                 code: 200,
@@ -39,7 +51,7 @@ const postController = {
     //get a post
     getPost: async(req,res)=>{
         try {
-            const post = await Post.findById(req.params.id).populate("by").populate("comments")
+            const post = await Post.findById(req.params.id).populate("author").populate("comments")
             if(post){
                 return res.json({
                     code: 200,

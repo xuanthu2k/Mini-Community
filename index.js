@@ -1,9 +1,11 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
+const jwt = require('jsonwebtoken')
 const userRoute = require('./routes/userRoute')
 const postRoute = require('./routes/postRoute')
 const commentRoute = require('./routes/commentRoute')
+const authRoute = require('./routes/authRoute')
 
 dotenv.config()
 const app = express()
@@ -16,10 +18,11 @@ mongoose.connect(process.env.MONGO_URI,()=>{console.log('Ket noi db thanh cong')
 app.use('/api/user',userRoute)
 app.use('/api/post',postRoute)
 app.use('/api/comment',commentRoute)
+app.use('/api/auth',authRoute)
 
 app.get('/',(req,res)=>{
     res.json({
-        message: 'Chua ho tro duong dan nay'
+        message: 'Add /api/user or /api/post or /api/comment'
     })
 })
 

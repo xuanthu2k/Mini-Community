@@ -2,9 +2,18 @@ const mongoose = require('mongoose')
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-    name: {
+    username: {
+        type: String,
+        required:true,
+        unique:true
+    },
+    password: {
         type: String,
         required:true
+    },
+    admin: {
+        type: Boolean,
+        default:false
     },
     avatar: {
         type: String
@@ -18,14 +27,16 @@ const userSchema = new Schema({
 })
 
 const postSchema = new Schema({
-    by: {
+    author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true
     },
     content: {
-        text_content: String,
-        image: String
+        type: String
+    },
+    image: {
+        type: String
     },
     comments:[
         {
@@ -36,24 +47,16 @@ const postSchema = new Schema({
     likes: {
         type:Number,
         default: 0
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now
-    }  
-})
+    }
+},{ timestamps: true })
 
 const commentSchema = new Schema({
-    by: {
+    author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true
     },
-    contained: {
+    post: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Post",
         required: true
@@ -64,16 +67,8 @@ const commentSchema = new Schema({
     likes: {
         type:Number,
         default: 0
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now
-    } 
-})
+    }
+},{ timestamps: true })
 
 const User = mongoose.model('User',userSchema)
 const Post = mongoose.model('Post',postSchema)
