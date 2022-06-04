@@ -5,8 +5,8 @@ const {User, Post} = require('../models/model')
 const postController = {
     addPost: async(req,res)=>{
         try {
-            const {content, image} = req.body
-            if(!content || !image){
+            const {content, title, image} = req.body
+            if(!content || !title || !image){
                 return res.json({
                     code: 400,
                     message: "Invalid post"
@@ -15,6 +15,7 @@ const postController = {
             const postData = {
                 author: req.user.id,
                 content,
+                title,
                 image
             }
             const newPost = new Post(postData)

@@ -32,7 +32,7 @@ const commentController = {
     },
     getComments: async(req,res)=>{
         try {
-            const comments = await Comment.find()
+            const comments = await Comment.find().populate("author")
             return res.json({
                 code:200,
                 data: comments
