@@ -23,10 +23,11 @@ const authController = {
                 username: user.username,
                 id: user.id
             }
-            const token = await jwt.sign(payload,process.env.TOKEN_SECRET,{expiresIn: "30d"})
+            const token = await jwt.sign(payload,process.env.TOKEN_SECRET,{expiresIn: "1d"})
             return res.json({
                 code: 200,
                 message: "Login successfully",
+                userID:user.id,
                 token
             })
         } catch (error) {
