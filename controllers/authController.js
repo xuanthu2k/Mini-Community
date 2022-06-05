@@ -28,6 +28,7 @@ const authController = {
                 code: 200,
                 message: "Login successfully",
                 userID:user.id,
+                admin: user.admin,
                 token
             })
         } catch (error) {
