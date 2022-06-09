@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const {User, Post} = require('../models/model')
+const bcrypt = require('bcrypt')
 
 const userController = {
     // add user
@@ -18,7 +19,8 @@ const userController = {
                     message: "invalid password"
                 })
             }
-            const newUser = new User({username, password})
+            const hashed = await bcrypt.hash(password,10)
+            const newUser = new User({username, password:hashed})
             const saveUSer = await newUser.save()
             return res.json({
                 code: 200,

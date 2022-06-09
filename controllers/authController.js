@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const {User, Post, Comment} = require('../models/model')
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
 
 const authController = {
     // Login
@@ -13,7 +14,8 @@ const authController = {
                     message: "wrong username"
                 })
             }
-            if(user.password!=req.body.password){
+            const comparePass = await bcrypt.compare(req.body.password, user.password)
+            if(!comparePass){
                 return res.json({
                     code: 400,
                     message: 'wrong password'

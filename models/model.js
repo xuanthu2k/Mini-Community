@@ -16,7 +16,8 @@ const userSchema = new Schema({
         default:false
     },
     avatar: {
-        type: String
+        type: String,
+        default: "https://png.pngtree.com/png-vector/20200329/ourlarge/pngtree-character-avatar-of-businessman-with-beard-png-image_2166772.jpg"
     },
     posts:[
         {
@@ -55,7 +56,7 @@ const postSchema = new Schema({
 
 const commentSchema = new Schema({
     author: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: "User",
         required: true
     },

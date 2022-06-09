@@ -11,7 +11,7 @@ const commentController = {
                 })
             }
             const commentData = {
-                author: req.user.id,
+                author: req.user.username,
                 post,
                 content
             }

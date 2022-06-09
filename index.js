@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
+const bcrypt = require('bcrypt')
 const cors = require('cors')
 const jwt = require('jsonwebtoken')
 const userRoute = require('./routes/userRoute')

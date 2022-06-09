@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
 const {User, Post, Comment} = require('../models/model')
 
 const authMiddleware = {
